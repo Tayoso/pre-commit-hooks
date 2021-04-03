@@ -1,0 +1,11 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.csv
+*.Ruser
+*.rdata
+*.rds
+national_parks
+demo_proj
+Dockerfile
