@@ -32,23 +32,6 @@ Create a `.pre-commit-config.yaml` file within your project and use in multiple 
 
 ```yaml
 # All available hooks: https://pre-commit.com/hooks.html
-# This is for python
-repos:
--   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.2.0
-    hooks:
-    -   id: trailing-whitespace
-    -   id: mixed-line-ending
--   repo: https://github.com/psf/black
-    rev: 20.8b1
-    hooks:
-    -   id: black
-```
-
-
-
-```yaml
-# All available hooks: https://pre-commit.com/hooks.html
 # R specific hooks: https://github.com/lorenzwalthert/precommit
 repos:
 -   repo: https://github.com/lorenzwalthert/precommit
@@ -77,6 +60,23 @@ repos:
         files: '\.Rhistory|\.RData|\.Rds|\.rds$'
         # `exclude: <regex>` to allow committing specific files.
 
+```
+
+
+
+```yaml
+# All available hooks: https://pre-commit.com/hooks.html
+# This is for python
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0
+    hooks:
+    -   id: trailing-whitespace
+    -   id: mixed-line-ending
+-   repo: https://github.com/psf/black
+    rev: 20.8b1
+    hooks:
+    -   id: black
 ```
 
 
@@ -180,5 +180,5 @@ For full set up guide see in link [Install and use pre-commit hooks in python](h
 ## Sources
 
 1. [What are Git Hooks and How to Start Using Them? (hostinger.co.uk)](https://www.hostinger.co.uk/tutorials/how-to-use-git-hooks/#:~:text=Git hooks are shell scripts,we can automate certain things.)
-2. https://towardsdatascience.com/static-code-analysis-for-python-bdce10b8d287
-3. [Pre-commit hooks you must know. Boost your productivity and code… | by Martin Thoma | Towards Data Science](https://towardsdatascience.com/pre-commit-hooks-you-must-know-ff247f5feb7e)# pre-commit-hooks
+2. [Static code analysis](https://towardsdatascience.com/static-code-analysis-for-python-bdce10b8d287)
+3. [Pre-commit hooks you must know. Boost your productivity and code… | by Martin Thoma | Towards Data Science](https://towardsdatascience.com/pre-commit-hooks-you-must-know-ff247f5feb7e)

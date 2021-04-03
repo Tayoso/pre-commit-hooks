@@ -7,5 +7,4 @@
 *.rdata
 *.rds
 national_parks
-demo_proj
 Dockerfile

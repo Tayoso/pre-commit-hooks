@@ -1,0 +1,10 @@
+# config to load data
+
+default:
+    link: "../data/"
+    stadiums: "./raw/stadiums.csv"
+    stations: "./raw/stations.csv"
+    train_sample: "./processed/train_sample.csv"
+    national_parks: "./raw/national_parks/National_Parks_England.shp"
+    image: "./raw/add_new_features.rdata"
+    output: "add_new_features_2.csv"
