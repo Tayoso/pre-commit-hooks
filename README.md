@@ -4,7 +4,7 @@
 
 Git hooks are shell scripts that run automatically before or after git executes an important command like Commit or Push. You can find hooks in your **.git** folder. When you `$ git init`, that command generates a number of hooks which define how git is able to write from your local to your remote repository. 
 
-<img src="..\images\git-hooks.png" alt="git-hooks" style="zoom:50%;" />
+<img src=".\images\git-hooks.png" alt="git-hooks" style="zoom:50%;" />
 
 A description of some of the hooks above are highlighted in the table below [1]. Depending on your software requirements and your knowledge of Bash, you can harness the full potential of these hooks and also create custom hooks. For more info, read this article on creating custom pre-commit hooks [Implement your own Pre-commit Hooks](https://towardsdatascience.com/how-to-code-your-own-python-pre-commit-hooks-with-bash-171298c6ee05).
 
@@ -24,7 +24,7 @@ A description of some of the hooks above are highlighted in the table below [1].
 
 Pre-commit hooks are a mechanism of the version control system git. They let you execute code right before the commit. In this wiki, we will highlight a few packages which are useful for static code analysis. Some of which are the very hooks used in the pre-commit hooks.[2]
 
-<img src="..\images\pre_com_image.jpeg" style="zoom:50%;" />
+<img src=".\images\pre_com_image.jpeg" style="zoom:50%;" />
 
 
 
