@@ -13,7 +13,7 @@
 
 # set up project env in the current directory
 ## setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
-# renv::init()  
+# renv::init()
 # renv::snapshot()
 
 # load packages -----------------------------------------------------------
@@ -30,10 +30,10 @@ library(renv)
 config <- config::get(file = "./config.yml")
 
 # load data --------------------------------------------------------------
-data <- read.csv(paste0(config$link,config$train_sample))
-stadiums <- read.csv(paste0(config$link,config$stadiums))
-stations <- read.csv(paste0(config$link,config$stations))
-national_parks <- st_read(paste0(config$link,config$national_parks))
+data <- read.csv(paste0(config$link, config$train_sample))
+stadiums <- read.csv(paste0(config$link, config$stadiums))
+stations <- read.csv(paste0(config$link, config$stations))
+national_parks <- st_read(paste0(config$link, config$national_parks))
 
 
 # load functions ---------------------------------------------------------
@@ -46,11 +46,11 @@ get_nearest_feature_column_and_geom <- function(x, y, col = "column", geom = "ge
   x[, c(col, "geometry.y")] <- res[, c(col, geom)]
   return(x)
 }
-create_lists <- function(x, splits = 29,each = 1){
-  my_split <- base::rep(1:splits,each = each, length = nrow(x))
+create_lists <- function(x, splits = 29, each = 1) {
+  my_split <- base::rep(1:splits, each = each, length = nrow(x))
   my_split2 <- dplyr::mutate(x, my_split = my_split)
-  list_lists <- base::split(my_split2,my_split2$my_split)
-  #list_lists <- purrr::map(my_split3$data, ~ split(., func_arg))
+  list_lists <- base::split(my_split2, my_split2$my_split)
+  # list_lists <- purrr::map(my_split3$data, ~ split(., func_arg))
   return(list_lists)
 }
 get_the_distance <- function(x, y) {
@@ -58,7 +58,7 @@ get_the_distance <- function(x, y) {
   # y is the data with the y geometry as the active geom
   for (i in 1:length(x)) {
     # message for progress
-    message(paste0((i/length(x))*100,"% at ",Sys.time()))
+    message(paste0((i / length(x)) * 100, "% at ", Sys.time()))
 
     x_1 <- x[[i]]
     y_1 <- y[[i]]
@@ -78,13 +78,13 @@ get_the_distance <- function(x, y) {
 
 # Stadiums --------------------------------------------------------------
 # convert data to shpfile
-data_shp <- st_as_sf(data,coords = c("longitude","latitude"), crs = 4326)
-stadiums_shp <- st_as_sf(stadiums, coords = c("Longitude","Latitude"), crs = 4326)
+data_shp <- st_as_sf(data, coords = c("longitude", "latitude"), crs = 4326)
+stadiums_shp <- st_as_sf(stadiums, coords = c("Longitude", "Latitude"), crs = 4326)
 # data_shp <- st_transform(data_shp,crs = 27700)
 # stadiums_shp <- st_transform(stadiums_shp,crs = 27700)
 
 # get the nearest stadiums to each ppt - add name (maybe add capacity) and also rename the app. columns
-data_stadiums_shp <- get_nearest_feature_column_and_geom(data_shp,stadiums_shp,"Name","geometry")
+data_stadiums_shp <- get_nearest_feature_column_and_geom(data_shp, stadiums_shp, "Name", "geometry")
 colnames(data_stadiums_shp)[colnames(data_stadiums_shp) == "Name"] <- "stadium_name"
 
 # duplicate the object and set the geometry for x id of get_the_distance()
@@ -105,26 +105,29 @@ data_stadiums_shp_distance <- get_the_distance(data_stadiums_shp_lists, data_sta
 
 # add capacity as 'stad_capacity', rename length_to_centroid as 'stad_distance' and deselect 'my_split' column
 data_stadiums_shp_distance <- data_stadiums_shp_distance %>%
-  left_join(stadiums[,c("Name","Capacity")], by = c("stadium_name"="Name")) %>%
+  left_join(stadiums[, c("Name", "Capacity")], by = c("stadium_name" = "Name")) %>%
   select(-my_split)
 colnames(data_stadiums_shp_distance)[colnames(data_stadiums_shp_distance) == "Capacity"] <- "stad_capacity"
 colnames(data_stadiums_shp_distance)[colnames(data_stadiums_shp_distance) == "length_to_centroid"] <- "stad_distance"
 
 # test and delete
-data_stadiums_shp_distance %>% mutate(stad_distance=as.integer(stad_distance)) %>% arrange(stad_distance) ## DELETE!!!!
+data_stadiums_shp_distance %>%
+  mutate(stad_distance = as.integer(stad_distance)) %>%
+  arrange(stad_distance) ## DELETE!!!!
 
 # Stations ------------------------------------------------------------
 # convert data to shpfile
 data_stadiums_shp_distance <- st_as_sf(data_stadiums_shp_distance, crs = 4326) %>%
   select(-geometry.y)
-stations_shp <- st_as_sf(stations, coords = c("Longitude","Latitude"), crs = 4326)
+stations_shp <- st_as_sf(stations, coords = c("Longitude", "Latitude"), crs = 4326)
 
 # get the nearest stations to each ppt
 data_stations_shp <- get_nearest_feature_column_and_geom(
   data_stadiums_shp_distance,
   stations_shp,
   c("Station", "Entries.and.exits.2020"),
-  "geometry")
+  "geometry"
+)
 
 # duplicate the object and set the geometry for x id of get_the_distance()
 data_stations_shp_dup <- data_stations_shp
@@ -161,7 +164,7 @@ rm(data_stadiums_shp_y_lists)
 
 # convert data to shpfile and subset the data to aid faster processing
 data_stations_shp_distance_2 <- st_as_sf(data_stations_shp_distance, crs = 4326) %>%
-  select(id,geometry)
+  select(id, geometry)
 national_parks_shp <- st_transform(national_parks, crs = 4326) %>%
   select(name)
 
@@ -173,7 +176,8 @@ data_national_parks_shp <- get_nearest_feature_column_and_geom(
   data_stations_shp_distance_2,
   national_parks_shp,
   "name",
-  "geometry")
+  "geometry"
+)
 
 # duplicate the object and set the geometry for x id of get_the_distance()
 data_national_parks_shp_dup <- data_national_parks_shp
@@ -193,7 +197,7 @@ data_national_parks_shp_distance <- get_the_distance(data_national_parks_shp_lis
 
 # rename Entries.and.exits.2020, rename length_to_centroid as 'stat_distance' and deselect 'my_split' column
 data_output <- data_national_parks_shp_distance %>%
-  select(-my_split,-geometry.y, -geometry) %>%
+  select(-my_split, -geometry.y, -geometry) %>%
   left_join(data_stations_shp_distance, by = "id") %>%
   select(-geometry.y)
 colnames(data_output)[colnames(data_output) == "name"] <- "national_park_name"

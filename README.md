@@ -84,7 +84,7 @@ repos:
 ## Why use Pre-commit hooks?
 
 - Improve the quality of commits, obviously.
-- Very useful in production environments for code compliance.
+- Very useful in production environments for code styling and compliance.
 - These hooks help **automate static code analysis** thereby informing the developer of potential issues within the code.
 
 
@@ -93,10 +93,10 @@ repos:
 
 Some hooks are specific to programming languages other than Python and R. However, most of these hooks can be used in generic projects to check other non-specific programming scripts.
 
-- Code autoformatting
+- Code analysis
   - R: lintr
   - Python: pylint
-- Code quality and styling
+- Code quality and styling (automated)
   - R: styler, tidyverse_style
   - Python: black, flake8
 
