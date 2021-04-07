@@ -182,6 +182,16 @@ For full set up guide see in link [Install and use pre-commit hooks in python](h
 
 
 
+### Pre-commits in action
+
+Snapshot of pre-commit hooks in use (R and Python). The typical results are Passed, Failed, Skipped. Skipped denotes there is nothing to check perhaps because the file is missing or you have forgotten to `$ git add` the necessary files.
+
+<img src="D:\my files_\GIT\projects\wikis\Pre_commit_hooks_in_R\images\application_r.png" style="zoom:100%;" />
+
+![](D:\my files_\GIT\projects\wikis\Pre_commit_hooks_in_R\images\application_python.png)
+
+
+
 ## Sources
 
 1. [What are Git Hooks and How to Start Using Them? (hostinger.co.uk)](https://www.hostinger.co.uk/tutorials/how-to-use-git-hooks/#:~:text=Git hooks are shell scripts,we can automate certain things.)
