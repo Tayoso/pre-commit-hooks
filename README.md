@@ -188,9 +188,9 @@ The typical results when you commit a repo with pre-commit hooks are Passed, Fai
 
 <img src=".\images\application_r.png" style="zoom:100%;" />
 
-![](.\images\application_python.png)
+<img src=".\images\application_python.png" style="zoom:100%;" />
 
-Snapshots of pre-commit hooks in use (R and Python). 
+Snapshots of pre-commit hooks in use (R and Python).
 
 
 
