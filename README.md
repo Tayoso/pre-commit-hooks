@@ -119,6 +119,11 @@ install.packages("precommit")
 install.packages("reticulate")
 install.packages("git2r")
 
+# load the libraries
+library(precommit)
+library(reticulate)
+library(git2r)
+
 # install miniconda which will run the pre-commit
 reticulate::install_miniconda()
 
